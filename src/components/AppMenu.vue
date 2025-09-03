@@ -32,9 +32,7 @@ const items = ref([
 </script>
 
 <template>
-  <div>
-    <Menu :model="items" />
-  </div>
+  <Menu :model="items" class="h-full"/>
 </template>
 
 <style scoped>

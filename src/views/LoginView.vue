@@ -1,13 +1,41 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {useRouter} from "vue-router";
+
+import {authLogin, editPassword} from "@/api/AuthApi.ts";
+
+const router = useRouter();
 
 const username = ref("");
 const password = ref("");
 const message = ref("");
+
+const new_password = ref("")
+
+const showDialog = ref(false);
 const submit = () => {
+  message.value = "";
   console.log(username.value, password.value);
-  message.value = "账号或密码错误"
+  authLogin({username: username.value, password: password.value}).then(res => {
+    console.log(res)
+    if (res.data.code === 2000) {
+      if (res.data.data.is_first_login) {
+        showDialog.value = true
+      } else {
+        router.push("/")
+        localStorage.setItem("token", res.data.data.token)
+      }
+    } else {
+      message.value = res.data.message
+    }
+  })
 };
+const editPasswordSubmit = () => {
+  editPassword({username: username.value, old_password: password.value, new_password: new_password.value}).then(res => {
+    console.log(res)
+    showDialog.value = false
+  })
+}
 </script>
 
 <template>
@@ -41,6 +69,17 @@ const submit = () => {
       </template>
     </Card>
   </div>
+  <Dialog v-model:visible="showDialog" header="首次登录需修改密码">
+    <div class="flex flex-col gap-5">
+      <FloatLabel variant="on">
+        <Password toggle-mask :feedback="false" v-model="new_password" class="password"
+                  size="small"/>
+        <label>新密码</label>
+      </FloatLabel>
+      <Button label="确定" @click="editPasswordSubmit" size="small"/>
+    </div>
+
+  </Dialog>
 </template>
 
 <style scoped>

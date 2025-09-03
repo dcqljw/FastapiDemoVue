@@ -8,6 +8,13 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: MainLayout,
+            children: [
+                {
+                    path: "personal_center",
+                    name: 'personal_center',
+                    component: () => import('../views/PersonalCenterView.vue'),
+                }
+            ]
         },
         {
             path: '/Login',
