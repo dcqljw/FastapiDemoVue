@@ -2,7 +2,7 @@
 import AppConfigurator from "@/components/AppConfigurator.vue";
 import {ref} from "vue";
 
-const visable = ref(false)
+const visible = ref(false)
 const op = ref()
 const toggle = (e: any) => {
   op.value.toggle(e)
@@ -15,10 +15,10 @@ const toggle = (e: any) => {
       FastApiDemo
     </div>
     <div class="flex items-center mr-[20px] gap-5">
-      <Button type="button" icon="pi pi-palette" @click="visable=true" variant="text"/>
+      <Button type="button" icon="pi pi-palette" @click="visible=true" variant="text"/>
       <Avatar label="D" @click="toggle" class="cursor-pointer"/>
     </div>
-    <Drawer v-model:visible="visable" position="right">
+    <Drawer v-model:visible="visible" position="right">
       <template #header>
         <div>配置</div>
       </template>
@@ -35,7 +35,7 @@ const toggle = (e: any) => {
     </div>
     <Divider/>
     <div class="user-popover-menu">
-      <Button label="个人中心" size="small" variant="text" class="w-full" @click="$router.push('/personal_center')"/>
+      <Button icon="pi pi-user" severity="contrast" label="个人中心" size="small" variant="text" class="w-full" @click="$router.push('/user_center')"/>
     </div>
     <Divider/>
     <Button label="退出登录" raised size="small" class="w-full"/>
