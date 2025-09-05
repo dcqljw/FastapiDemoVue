@@ -19,7 +19,7 @@ import TagList from "@/components/TagList.vue";
         <div class="absolute h-[40px] bg-[#f1f5f9] w-full">
           <TagList/>
         </div>
-        <div class="bg-[#ffffff] overflow-auto h-full pt-[40px]">
+        <div class=" overflow-auto h-full pt-[40px]">
           <RouterView/>
         </div>
       </div>

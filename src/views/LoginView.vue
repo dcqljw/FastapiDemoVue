@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 
-import {authLogin, editPassword} from "@/api/AuthApi.ts";
+import {authLogin, editPasswordApi} from "@/api/AuthApi.ts";
 
 const router = useRouter();
 
@@ -23,15 +23,19 @@ const submit = () => {
         showDialog.value = true
       } else {
         router.push("/")
-        localStorage.setItem("token", res.data.data.token)
       }
+      localStorage.setItem("token", res.data.data.token)
     } else {
       message.value = res.data.message
     }
   })
 };
 const editPasswordSubmit = () => {
-  editPassword({username: username.value, old_password: password.value, new_password: new_password.value}).then(res => {
+  editPasswordApi({
+    username: username.value,
+    old_password: password.value,
+    new_password: new_password.value
+  }).then(res => {
     console.log(res)
     showDialog.value = false
   })
@@ -69,7 +73,7 @@ const editPasswordSubmit = () => {
       </template>
     </Card>
   </div>
-  <Dialog v-model:visible="showDialog" header="首次登录需修改密码">
+  <Dialog v-model:visible="showDialog" header="首次登录需修改密码" modal>
     <div class="flex flex-col gap-5">
       <FloatLabel variant="on">
         <Password toggle-mask :feedback="false" v-model="new_password" class="password"

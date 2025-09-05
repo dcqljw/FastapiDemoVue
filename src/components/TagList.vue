@@ -14,6 +14,11 @@ const options = ref([
 const tagCloseHandler = (index: number) => {
   console.log(index)
   options.value.splice(index, 1)
+  if (index === 0){
+    router.push(options.value[0].path)
+  }else {
+    router.push(options.value[index - 1].path)
+  }
 }
 const toggleTag = (path: string) => {
   router.push(path)
@@ -27,7 +32,7 @@ const toggleTag = (path: string) => {
          :class="{'tag-item-active': route.path === item.path}"
          style="background: #ffffff;border:2px solid var(--p-surface-200)">
       <span class="tag-item-title">{{ item.name }}</span>
-      <i class="pi pi-times tag-close" style="font-size: 12px" @click="tagCloseHandler(index)"></i>
+      <i class="pi pi-times tag-close" v-if="options.length > 1" style="font-size: 12px" @click.stop="tagCloseHandler(index)"></i>
     </Tag>
   </div>
 </template>

@@ -15,6 +15,6 @@ export function authLogin(loginForm: LoginForm) {
     return httpClient.post('/auth/login', loginForm)
 }
 
-export function editPassword(editPasswordForm: EditPasswordForm) {
+export function editPasswordApi(editPasswordForm: EditPasswordForm) {
     return httpClient.post('/auth/edit_password', editPasswordForm)
 }
