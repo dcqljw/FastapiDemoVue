@@ -45,9 +45,9 @@ const toggle_message = (e: any) => {
     </div>
     <Divider/>
     <div class="flex flex-col gap-2">
-      <div class="flex gap-2 items-center" v-for="i in 3">
-        <div class="mr-[10px]">
-          <i class="pi pi-megaphone"></i>
+      <div class="flex gap-2 items-center hover:bg-[#f8f8f8] cursor-pointer" v-for="i in 3">
+        <div class="mr-[10px] w-[40px] h-[40px]">
+          <Tag icon="pi pi-megaphone" class="h-full w-full" size="10px"></Tag>
         </div>
         <div class="flex flex-col">
           <span>FastApiDemo v1.0.0 发布</span>
