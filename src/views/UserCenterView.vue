@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import {ref, onMounted} from "vue";
+import {ref, onMounted, computed} from "vue";
 import {useToast} from "primevue/usetoast";
 
 import {editPasswordApi} from "@/api/AuthApi.ts";
-import {userInfo} from "@/api/UserApi.ts";
+import {useUserStore} from "@/stores/user.ts";
 
+const userStore = useUserStore();
+const userInfo = computed(() => userStore.getUserInfo)
 const toast = useToast();
 const showDialog = ref(false);
 const errorMessage = ref("");
-const username = ref("");
+const username = ref<string>('');
 const email = ref("");
 const phone = ref("19199999999");
 const password = ref("");
@@ -44,17 +46,6 @@ const resetHandler = () => {
   new_password.value = "";
   confirm_new_password.value = "";
 }
-const getUserInfo = () => {
-  userInfo().then(res => {
-    if (res.data.code === 2000) {
-      username.value = res.data.data.username
-      email.value = res.data.data.email
-    }
-  })
-}
-onMounted(() => {
-  getUserInfo()
-})
 </script>
 
 <template>
@@ -65,12 +56,12 @@ onMounted(() => {
           <div class="flex flex-col items-center gap-3">
             <Avatar image="https://primefaces.org/cdn/primevue/images/organization/walter.jpg" size="xlarge"
                     shape="circle"/>
-            <div class="text-xl">{{ username }}</div>
+            <div class="text-xl">{{ userInfo.username }}</div>
           </div>
           <div class="flex flex-col justify-items-start gap-3">
-            <div class="flex gap-2 items-center" v-if="email">
+            <div class="flex gap-2 items-center" v-if="userInfo.email">
               <i class="pi pi-envelope"></i>
-              {{ email }}
+              {{ userInfo.email }}
             </div>
           </div>
           <Divider align="center">
@@ -94,7 +85,7 @@ onMounted(() => {
           <div class="flex flex-col gap-5">
             <div class="flex gap-4 items-center">
               <label class="w-[100px]">用户名</label>
-              <InputText v-model="username" disabled fluid/>
+              <InputText v-model="userInfo.username" disabled fluid/>
             </div>
             <div class="flex gap-4 items-center">
               <label class="w-[100px]">密码</label>
@@ -108,7 +99,7 @@ onMounted(() => {
             </div>
             <div class="flex gap-4 items-center">
               <label class="w-[100px]">邮箱</label>
-              <InputText v-model="email" fluid/>
+              <InputText v-model="userInfo.email" fluid/>
             </div>
             <div class="flex gap-4 items-center">
               <label class="w-[100px]">手机号</label>

@@ -3,8 +3,11 @@ import {ref} from "vue";
 import {useRouter} from "vue-router";
 
 import {authLogin, editPasswordApi} from "@/api/AuthApi.ts";
+import {useUserStore} from "@/stores/user.ts";
 
 const router = useRouter();
+
+const userStore = useUserStore();
 
 const username = ref("");
 const password = ref("");
@@ -24,6 +27,7 @@ const submit = () => {
       } else {
         router.push("/")
       }
+      userStore.setToken(res.data.data.token)
       localStorage.setItem("token", res.data.data.token)
     } else {
       message.value = res.data.message
