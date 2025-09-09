@@ -7,7 +7,7 @@ const httpClient = axios.create({
 });
 httpClient.interceptors.request.use(
     (config) => {
-        config.headers.Authorization = localStorage.getItem("token")
+        config.headers.Authorization = `bearer ${localStorage.getItem("token")}`
         return config
     },
     (error) => {
@@ -18,13 +18,13 @@ httpClient.interceptors.request.use(
 httpClient.interceptors.response.use(
     (response) => {
         if (response.status !== 200) {
-
             return Promise.reject(response)
         } else {
             return response
         }
     },
     (error) => {
+        console.log(error)
         const toast = useToastGlobal();
         toast.add({
             severity: 'error',
