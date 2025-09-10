@@ -10,6 +10,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppConfigurator: typeof import('./src/components/AppConfigurator.vue')['default']
     AppMenu: typeof import('./src/components/AppMenu.vue')['default']
+    AppMenuItem: typeof import('./src/components/AppMenuItem.vue')['default']
     Avatar: typeof import('primevue/avatar')['default']
     Button: typeof import('primevue/button')['default']
     Card: typeof import('primevue/card')['default']
@@ -33,6 +34,7 @@ declare module 'vue' {
     SplitButton: typeof import('primevue/splitbutton')['default']
     Tag: typeof import('primevue/tag')['default']
     TagList: typeof import('./src/components/TagList.vue')['default']
+    TieredMenu: typeof import('primevue/tieredmenu')['default']
     Toast: typeof import('primevue/toast')['default']
   }
   export interface GlobalDirectives {

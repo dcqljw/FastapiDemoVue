@@ -10,6 +10,11 @@ const router = createRouter({
             component: MainLayout,
             children: [
                 {
+                    path: "",
+                    name: 'index',
+                    component: () => import('../views/HomeView.vue'),
+                },
+                {
                     path: "user_center",
                     name: 'user_center',
                     component: () => import('../views/UserCenterView.vue'),
