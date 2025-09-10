@@ -8,32 +8,63 @@ const items = ref([
     icon: 'pi pi-user',
     items: [
       {
-        label: "sub",
+        label: "仪表盘",
         icon: 'pi pi-user',
         items: [
           {
             label: "aaa",
             icon: 'pi pi-user',
+            to: '/user_center',
           },
           {
             label: "bbbb",
             icon: 'pi pi-user',
+            items: [
+              {
+                label: "aaa",
+                icon: 'pi pi-user',
+                to: '/user_center',
+              },
+              {
+                label: "bbbb",
+                icon: 'pi pi-user',
+                to: '/user_center',
+              }
+            ]
           }
         ]
+      },
+      {
+        label: '用户',
+        icon: 'pi pi-user',
+        items: [
+          {
+            label: "aaa",
+            icon: 'pi pi-user',
+            to: '/user_center',
+          },
+          {
+            label: "bbbb",
+            icon: 'pi pi-user',
+            to: '/user_center',
+          }
+        ]
+      }, {
+        label: '设置',
+        icon: 'pi pi-settings',
       }
     ]
   },
-  {
-    label: '用户',
-    icon: 'pi pi-user'
-  }
 ]);
 </script>
 
 <template>
-  <template v-for="(item,i) in items" :key="item">
-    <app-menu-item :item="item"></app-menu-item>
-  </template>
+  <ul class="layout-menu">
+    <template v-for="(item,i) in items" :key="item">
+      <app-menu-item :item="item"></app-menu-item>
+    </template>
+  </ul>
+
 </template>
 
 <style scoped>

@@ -4,3 +4,44 @@
 #app {
     height: 100vh;
 }
+
+.layout-menu a {
+    display: flex;
+    padding: .75rem 1rem;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+}
+
+.layout-root-menuitem > a {
+    display: none;
+}
+
+.layout-menu a:hover {
+    background-color: var(--p-surface-100);
+}
+
+.layout-submenu-toggler {
+    font-size: 75%;
+    margin-left: auto;
+}
+
+.layout-menu ul li ul li a {
+    margin-left: 1rem;
+}
+
+.layout-menu ul li ul li ul li a {
+    margin-left: 2rem;
+}
+
+.layout-menu {
+    overflow: hidden;
+}
+
+.active-menuitem > a .layout-submenu-toggler {
+    transform: rotate(-180deg);
+}
+
+.layout-submenu-toggler {
+    transition: transform .2s;
+}
