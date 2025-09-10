@@ -21,17 +21,10 @@ const submit = () => {
   console.log(username.value, password.value);
   authLogin({username: username.value, password: password.value}).then(res => {
     console.log(res)
-    if (res.data.code === 2000) {
-      if (res.data.data.is_first_login) {
-        showDialog.value = true
-      } else {
-        router.push("/")
-      }
-      userStore.setToken(res.data.data.token)
-      localStorage.setItem("token", res.data.data.token)
-    } else {
-      message.value = res.data.message
-    }
+    router.push("/")
+    userStore.setToken(res.data.access_token)
+    localStorage.setItem("token", res.data.access_token)
+    message.value = res.data.message
   })
 };
 const editPasswordSubmit = () => {

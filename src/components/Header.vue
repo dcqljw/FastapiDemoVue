@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import AppConfigurator from "@/components/AppConfigurator.vue";
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 
+import {authLogout} from "@/api/AuthApi.ts";
+
+const router = useRouter();
 const visible = ref(false)
 const i18n_popover = ref()
 const message_popover = ref()
@@ -18,6 +22,15 @@ const toggle_i18n = (e: any) => {
 }
 const toggle_message = (e: any) => {
   message_popover.value.toggle(e)
+}
+const logout = () => {
+  authLogout().then(res => {
+    console.log(res)
+    if (res.data.code === 2000) {
+      localStorage.removeItem("token")
+      router.push("/login")
+    }
+  })
 }
 </script>
 
@@ -76,7 +89,7 @@ const toggle_message = (e: any) => {
               @click="$router.push('/user_center')"/>
     </div>
     <Divider/>
-    <Button label="退出登录" raised size="small" class="w-full"/>
+    <Button label="退出登录" raised size="small" class="w-full" @click="logout"/>
   </Popover>
 </template>
 

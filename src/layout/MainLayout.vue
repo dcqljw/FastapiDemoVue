@@ -3,7 +3,7 @@ import Header from "@/components/Header.vue";
 import AppMenu from "@/components/AppMenu.vue";
 import TagList from "@/components/TagList.vue";
 
-import {ref, onMounted} from "vue";
+import {onMounted} from "vue";
 import {RouterView} from "vue-router";
 
 import {useUserStore} from "@/stores/user.ts";

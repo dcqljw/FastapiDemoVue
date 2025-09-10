@@ -10,7 +10,7 @@ const userInfo = computed(() => userStore.getUserInfo)
 const toast = useToast();
 const showDialog = ref(false);
 const errorMessage = ref("");
-const username = ref<string>('');
+const username = ref(userStore.info.username);
 const email = ref("");
 const phone = ref("19199999999");
 const password = ref("");

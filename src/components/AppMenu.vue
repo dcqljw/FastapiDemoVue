@@ -3,36 +3,24 @@ import {ref} from "vue";
 
 const items = ref([
   {
-    label: 'Home',
+    label: '仪表盘',
     items: [
-      {
-        label: 'New',
-        icon: 'pi pi-plus'
-      },
-      {
-        label: 'Search',
-        icon: 'pi pi-search'
-      }
+      {label: "工作台"}
     ]
   },
   {
-    label: 'Profile',
-    items: [
-      {
-        label: 'Settings',
-        icon: 'pi pi-cog'
-      },
-      {
-        label: 'Logout',
-        icon: 'pi pi-sign-out'
-      }
-    ]
+    label: '用户',
+    icon: 'pi pi-user'
   }
 ]);
 </script>
 
 <template>
-  <Menu :model="items" class="h-full"/>
+  <PanelMenu :model="items" class="h-full">
+    <template #item="{item}">
+      {{ item.label }}
+    </template>
+  </PanelMenu>
 </template>
 
 <style scoped>

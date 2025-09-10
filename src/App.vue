@@ -5,13 +5,16 @@ import {setToastInstance} from "@/toast.ts";
 
 
 const toast = ref("");
-console.log("App")
-setToastInstance(toast.value)
+onMounted(() => {
+  console.log("App")
+  console.log(toast.value)
+  setToastInstance(toast.value)
+})
 </script>
 
 <template>
-  <RouterView/>
   <Toast ref="toast"/>
+  <RouterView/>
 </template>
 
 <style scoped>
