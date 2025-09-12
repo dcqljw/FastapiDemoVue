@@ -24,10 +24,10 @@ onMounted(() => {
       <Header/>
     </div>
     <div class="flex h-full pt-[60px]">
-      <div class="w-80 m-[10px] h-full bg-[#ffffff] p-[10px]">
+      <div class="w-80 m-[10px] h-full bg-[#ffffff] p-[10px] custom-menu">
         <AppMenu/>
       </div>
-      <div class="m-[10px]">
+      <div class="m-[10px] flex-1">
         <div class="absolute h-[40px] bg-[#f1f5f9] w-full">
           <TagList/>
         </div>
@@ -40,5 +40,7 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
+.custom-menu{
+  border-radius: var(--p-card-border-radius);
+}
 </style>

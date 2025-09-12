@@ -546,8 +546,8 @@ function onMenuModeChange() {
   <div>
     <div class="flex flex-col gap-4">
       <div>
-        <span class="text-sm text-muted-color font-semibold">Primary</span>
-        <div class="pt-2 flex gap-2 flex-wrap justify-between">
+        <span class="text-sm text-muted-color font-semibold">主题色</span>
+        <div class="pt-2 flex gap-2 flex-wrap ">
           <button
               v-for="primaryColor of primaryColors"
               :key="primaryColor.name"
@@ -555,13 +555,13 @@ function onMenuModeChange() {
               :title="primaryColor.name"
               @click="updateColors('primary', primaryColor)"
               :class="['border-none w-5 h-5 rounded-full p-0 cursor-pointer outline-none outline-offset-1', { 'outline-primary': layoutConfig.primary === primaryColor.name }]"
-              :style="{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--p-primary-color)' : primaryColor.palette['500']}` }"
+              :style="{ backgroundColor: `${primaryColor.name === 'noir' ? 'var(--p-text-color)' : primaryColor.palette['500']}` }"
           ></button>
         </div>
       </div>
       <div>
-        <span class="text-sm text-muted-color font-semibold">Surface</span>
-        <div class="pt-2 flex gap-2 flex-wrap justify-between">
+        <span class="text-sm text-muted-color font-semibold">表层</span>
+        <div class="pt-2 flex gap-2 flex-wrap ">
           <button
               v-for="surface of surfaces"
               :key="surface.name"
@@ -575,15 +575,6 @@ function onMenuModeChange() {
               :style="{ backgroundColor: `${surface.palette['500']}` }"
           ></button>
         </div>
-      </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-sm text-muted-color font-semibold">Presets</span>
-        <SelectButton v-model="preset" @change="onPresetChange" :options="presetOptions" :allowEmpty="false"/>
-      </div>
-      <div class="flex flex-col gap-2">
-        <span class="text-sm text-muted-color font-semibold">Menu Mode</span>
-        <SelectButton v-model="menuMode" @change="onMenuModeChange" :options="menuModeOptions" :allowEmpty="false"
-                      optionLabel="label" optionValue="value"/>
       </div>
     </div>
   </div>

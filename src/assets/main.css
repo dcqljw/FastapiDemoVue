@@ -21,6 +21,10 @@
     background-color: var(--p-surface-100);
 }
 
+.layout-menu-active {
+    background-color: var(--p-surface-100);
+}
+
 .layout-submenu-toggler {
     font-size: 75%;
     margin-left: auto;
@@ -44,4 +48,13 @@
 
 .layout-submenu-toggler {
     transition: transform .2s;
+}
+
+.outline-none {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.outline-primary {
+    outline-color: color-mix(in srgb, var(--p-primary-color) 100%, transparent);
 }

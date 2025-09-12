@@ -8,15 +8,24 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: MainLayout,
+            meta: {
+                title: '首页'
+            },
             children: [
                 {
                     path: "",
                     name: 'index',
+                    meta: {
+                        title: '首页'
+                    },
                     component: () => import('../views/HomeView.vue'),
                 },
                 {
                     path: "user_center",
                     name: 'user_center',
+                    meta: {
+                        title: '用户中心'
+                    },
                     component: () => import('../views/UserCenterView.vue'),
                 }
             ]

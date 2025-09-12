@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {useRoute} from "vue-router";
 
+const route = useRoute();
 const props = defineProps({
   item: {
     type: Object,
@@ -25,7 +27,7 @@ const itemClick = (event: any, item: any) => {
       <span>{{ item.label }}</span>
       <i class="pi pi-fw pi-angle-down layout-submenu-toggler" v-if="item.items"></i>
     </a>
-    <router-link v-if="item.to" :to="item.to">
+    <router-link v-if="item.to" :to="item.to" :class="{'layout-menu-active': route.path === item.to}">
       <i :class="item.icon"></i>
       <span>{{ item.label }}</span>
     </router-link>

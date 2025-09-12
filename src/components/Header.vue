@@ -45,7 +45,7 @@ const logout = () => {
       <Button severity="secondary" icon="pi pi-palette" @click="visible=true" variant="text"/>
       <Avatar label="D" @click="toggle" class="cursor-pointer"/>
     </div>
-    <Drawer v-model:visible="visible" position="right">
+    <Drawer v-model:visible="visible" position="right" :modal="false">
       <template #header>
         <div>配置</div>
       </template>

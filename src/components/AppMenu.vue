@@ -4,34 +4,16 @@ import AppMenuItem from "@/components/AppMenuItem.vue";
 
 const items = ref([
   {
-    label: '仪表盘',
-    icon: 'pi pi-user',
+    label: 'root',
     items: [
       {
         label: "仪表盘",
-        icon: 'pi pi-user',
+        icon: 'pi pi-home',
         items: [
           {
-            label: "aaa",
-            icon: 'pi pi-user',
+            label: "工作台",
             to: '/user_center',
           },
-          {
-            label: "bbbb",
-            icon: 'pi pi-user',
-            items: [
-              {
-                label: "aaa",
-                icon: 'pi pi-user',
-                to: '/user_center',
-              },
-              {
-                label: "bbbb",
-                icon: 'pi pi-user',
-                to: '/user_center',
-              }
-            ]
-          }
         ]
       },
       {
@@ -49,12 +31,13 @@ const items = ref([
             to: '/user_center',
           }
         ]
-      }, {
-        label: '设置',
-        icon: 'pi pi-settings',
+      },
+      {
+        label: '更新日志',
+        icon: 'pi pi-calendar',
       }
     ]
-  },
+  }
 ]);
 </script>
 
