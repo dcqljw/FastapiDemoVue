@@ -12,7 +12,7 @@ const items = ref([
         items: [
           {
             label: "工作台",
-            to: '/user_center',
+            to: '/',
           },
         ]
       },

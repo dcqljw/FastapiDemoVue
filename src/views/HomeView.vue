@@ -3,8 +3,11 @@
     <div class="col-span-3 row-span-1">
       <Card class="h-full">
         <template #content>
-          <div>
-            欢迎回来，{{ userStore.getUserInfo }}
+          <div class="flex justify-between items-center">
+            <div>
+              欢迎回来，{{ userStore.getUserInfo.username }}
+            </div>
+            <bg class="w-[160px]"/>
           </div>
         </template>
       </Card>
@@ -33,6 +36,7 @@
 
 <script setup lang="ts">
 import {useUserStore} from "@/stores/user.ts";
+import Bg from "@/assets/bg.vue";
 
 const userStore = useUserStore();
 </script>

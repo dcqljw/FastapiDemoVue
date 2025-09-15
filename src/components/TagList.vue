@@ -48,10 +48,14 @@ const toggleTag = (path: string) => {
 };
 
 const rightClickHandler = async (event: any, index: number) => {
+  rightMenu.value.hide();
   event.preventDefault();
   menuKey.value = index;
-  console.log(index)
   rightMenu.value.show(event);
+};
+
+const closeRightHandler = (event: any) => {
+  rightMenu.value.hide();
 };
 // 添加标签逻辑
 const addTagIfNotExists = () => {
@@ -89,7 +93,7 @@ watch(
       <i class="pi pi-times tag-close" v-if="options.length > 1" style="font-size: 12px"
          @click.stop="tagCloseHandler(index)"></i>
     </Tag>
-    <Menu ref="rightMenu" :model="rightitems" popup/>
+    <Menu ref="rightMenu" :model="rightitems" popup @blur="closeRightHandler($event)"/>
   </div>
 </template>
 
