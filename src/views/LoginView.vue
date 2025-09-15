@@ -12,19 +12,23 @@ const userStore = useUserStore();
 const username = ref("");
 const password = ref("");
 const message = ref("");
+const submitIsDisabled = ref(false);
 
 const new_password = ref("")
 
 const showDialog = ref(false);
-const submit = () => {
+const submit = async () => {
+  submitIsDisabled.value = true
   message.value = "";
   console.log(username.value, password.value);
-  authLogin({username: username.value, password: password.value}).then(res => {
+  await authLogin({username: username.value, password: password.value}).then(res => {
     console.log(res)
     router.push("/")
     userStore.setToken(res.data.access_token)
     localStorage.setItem("token", res.data.access_token)
     message.value = res.data.message
+  }).finally(() => {
+    submitIsDisabled.value = false
   })
 };
 const editPasswordSubmit = () => {
@@ -63,7 +67,9 @@ const editPasswordSubmit = () => {
           <Button variant="text" label="Forgot Password?" size="small"/>
         </div>
         <div>
-          <Button @click="submit" label="登录" class="w-full" size="small"/>
+          <Button @click="submit" label="登录" class="w-full" size="small" :disabled="submitIsDisabled">
+            <i v-if="submitIsDisabled" class="pi pi-spin pi-spinner" style="font-size: 1.5rem"></i>
+          </Button>
         </div>
         <Divider/>
         <div class="text-center text-xs">&copy;2025 FastAPI Demo</div>

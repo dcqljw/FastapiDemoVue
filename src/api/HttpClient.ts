@@ -11,6 +11,13 @@ httpClient.interceptors.request.use(
         return config
     },
     (error) => {
+        const toast = useToastGlobal();
+        toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: error.response.data.detail,
+            life: 3000
+        });
         return Promise.reject(error)
     }
 )
@@ -26,10 +33,16 @@ httpClient.interceptors.response.use(
     (error) => {
         console.log(error)
         const toast = useToastGlobal();
+        let error_msg;
+        if (error.message === "Network Error") {
+            error_msg = "Network Error"
+        } else {
+            error_msg = error.response.data.detail;
+        }
         toast.add({
             severity: 'error',
             summary: 'Error',
-            detail: error.response.data.detail,
+            detail: error_msg,
             life: 3000
         });
         router.push("/login")

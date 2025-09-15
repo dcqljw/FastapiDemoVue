@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import {ref, onMounted, computed} from "vue";
+import {useRouter} from "vue-router";
 import {useToast} from "primevue/usetoast";
 
 import {editPasswordApi} from "@/api/AuthApi.ts";
 import {useUserStore} from "@/stores/user.ts";
 
+const router = useRouter();
 const userStore = useUserStore();
 const userInfo = computed(() => userStore.getUserInfo)
 const toast = useToast();
@@ -34,6 +36,7 @@ const editPasswordHandler = () => {
           life: 3000
         })
         resetHandler()
+        router.push("/login")
         showDialog.value = false
       } else {
         errorMessage.value = res.data.message
