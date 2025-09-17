@@ -15,6 +15,7 @@ const rightitems = ref([
     label: '关闭当前标签页',
     icon: 'pi pi-times',
     command: () => {
+      console.log(menuKey.value)
       tagCloseHandler(menuKey.value);
     }
   },

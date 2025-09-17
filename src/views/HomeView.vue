@@ -23,7 +23,7 @@
           <div v-for="i in todoList">
             <div class="flex justify-between">
               <div>123</div>
-              <Checkbox v-model="checkbox" :value="i.id" :inputid="i.id" @change="setCheck"/>
+              <Checkbox v-model="checked" :value="i.id" :inputid="i.id" @change="setCheck(i.id)"/>
             </div>
             <Divider/>
           </div>
@@ -46,15 +46,16 @@ import {useUserStore} from "@/stores/user.ts";
 import Bg from "@/assets/bg.vue";
 
 const userStore = useUserStore();
-const checkbox = ref(true);
+const checked = ref();
 const todoList = ref([
-  {text: '1233', id: 1},
-  {text: '1235', id: 2},
-  {text: '1236', id: 3},
-  {text: '1237', id: 4},
+  {text: '1233', id: 1, checked: false},
+  {text: '1235', id: 2, checked: true},
+  {text: '1236', id: 3, checked: false},
+  {text: '1237', id: 4, checked: true},
 ])
-const setCheck = () => {
-  console.log(checkbox.value)
+checked.value = todoList.value.filter(i => i.checked).map(i => i.id)
+const setCheck = (id: number) => {
+  console.log(id)
 }
 </script>
 <style scoped>

@@ -17,18 +17,16 @@ const items = ref([
         ]
       },
       {
-        label: '用户',
-        icon: 'pi pi-user',
+        label: '系统管理',
+        icon: 'pi pi-cog',
         items: [
           {
-            label: "aaa",
-            icon: 'pi pi-user',
-            to: '/user_center',
+            label: "用户管理",
+            to: '/user',
           },
           {
-            label: "bbbb",
-            icon: 'pi pi-user',
-            to: '/user_center',
+            label: "角色管理",
+            to: '/role',
           }
         ]
       },

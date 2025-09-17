@@ -27,6 +27,22 @@ const router = createRouter({
                         title: '用户中心'
                     },
                     component: () => import('../views/UserCenterView.vue'),
+                },
+                {
+                    path: "user",
+                    name: 'user',
+                    meta: {
+                        title: '用户'
+                    },
+                    component: () => import('../views/UserView.vue'),
+                },
+                {
+                    path: 'role',
+                    name: 'role',
+                    meta: {
+                        title: '角色'
+                    },
+                    component: () => import('../views/RoleView.vue'),
                 }
             ]
         },
