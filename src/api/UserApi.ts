@@ -5,14 +5,18 @@ interface CreateUser {
     password: string;
 }
 
-export function userInfo() {
+export function fetchUserInfo() {
     return httpClient.post('/user/info')
 }
 
-export function getUserListApi() {
+export function fetchGetUserList() {
     return httpClient.post('/user/get_user')
 }
 
-export function createUserApi(user: CreateUser) {
+export function fetchCreateUser(user: CreateUser) {
     return httpClient.post('/user/create_user', user)
+}
+
+export function fetchDeleteUser(userId: string) {
+    return httpClient.post(`/user/delete_user?user_id=${userId}`)
 }

@@ -1,10 +1,15 @@
 <script setup lang="ts">
 import {ref} from "vue";
+import {useToast} from "primevue/usetoast";
 
-import {getUserListApi, createUserApi} from "@/api/UserApi.ts";
+import {fetchGetUserList, fetchCreateUser, fetchDeleteUser} from "@/api/UserApi.ts";
 
+
+const toast = useToast();
 const showEdite = ref(false);
 const deleteDialog = ref(false);
+const addUserDialog = ref(false);
+const errorMessage = ref("");
 const selectUserIndex = ref(0);
 const user = ref<[]>([]);
 const editUserData = ref({
@@ -13,6 +18,16 @@ const editUserData = ref({
   email: "",
   created_at: ""
 });
+const addUserData = ref({
+  username: "",
+  password: ""
+});
+const resetUserData = () => {
+  addUserData.value = {
+    username: "",
+    password: ""
+  }
+}
 const editUserHandler = (index: number) => {
   showEdite.value = !showEdite.value;
   selectUserIndex.value = index;
@@ -24,16 +39,47 @@ const submitEdit = () => {
 }
 
 const deleteUserHandler = () => {
-  user.value.splice(selectUserIndex.value, 1)
-  deleteDialog.value = !deleteDialog.value;
+  console.log(user.value[selectUserIndex.value])
+  fetchDeleteUser(user.value[selectUserIndex.value].id).then(res => {
+    if (res.data.code !== 2000) {
+      toast.add({
+        severity: 'error',
+        summary: '错误',
+        detail: res.data.message,
+        life: 3000
+      });
+    } else {
+      user.value.splice(selectUserIndex.value, 1)
+      deleteDialog.value = !deleteDialog.value;
+      toast.add({
+        severity: 'success',
+        summary: '成功',
+        detail: res.data.message,
+        life: 3000
+      });
+    }
+  })
+
 }
 
 const getUserList = () => {
-  getUserListApi().then(res => {
+  fetchGetUserList().then(res => {
     console.log(res)
     user.value = res.data.data
     console.log(user.value)
   })
+}
+const createUserHandler = () => {
+  if (!addUserData.value.username || !addUserData.value.password) {
+    errorMessage.value = "请填写用户名和密码"
+  } else {
+    fetchCreateUser(addUserData.value).then(res => {
+      console.log(res)
+      if (res.data.code !== 2000) {
+        errorMessage.value = res.data.message
+      }
+    })
+  }
 }
 getUserList();
 </script>
@@ -45,7 +91,7 @@ getUserList();
         <DataTable :value="user" removable-sort>
           <template #header>
             <div>
-              <Button label="新增用户" size="small" severity="contrast" variant="outlined"/>
+              <Button label="新增用户" size="small" severity="contrast" variant="outlined" @click="addUserDialog=true"/>
             </div>
           </template>
           <Column field="username" header="用户名" style="max-width: 100px"></Column>
@@ -65,6 +111,28 @@ getUserList();
       </template>
     </Card>
   </div>
+  <Dialog v-model:visible="addUserDialog" modal @show="resetUserData">
+    <template #header>
+      <div>新增用户</div>
+    </template>
+    <div class="flex flex-col gap-4 justify-items-center">
+      <div class="grid grid-cols-4">
+        <div class="flex items-center">用户名</div>
+        <InputText v-model="addUserData.username" class="col-span-3"/>
+      </div>
+      <div class="grid grid-cols-4">
+        <div class="flex items-center">密码</div>
+        <Password v-model="addUserData.password" toggleMask :feedback="false" class="col-span-3"/>
+      </div>
+      <div>
+        <Message severity="error" v-if="errorMessage">{{ errorMessage }}</Message>
+      </div>
+      <div class="flex justify-end gap-4">
+        <Button label="取消" severity="secondary" @click="addUserDialog=false"/>
+        <Button @click="createUserHandler" label="确认"/>
+      </div>
+    </div>
+  </Dialog>
   <Dialog v-model:visible="showEdite" modal>
     <template #header>
       <div>编辑用户</div>

@@ -2,7 +2,8 @@
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 
-import {authLogin, editPasswordApi} from "@/api/AuthApi.ts";
+import {fetchAuthLogin, fetchEditPassword} from "@/api/AuthApi.ts";
+import {fetchUserInfo} from "@/api/UserApi.ts";
 import {useUserStore} from "@/stores/user.ts";
 
 const router = useRouter();
@@ -21,18 +22,21 @@ const submit = async () => {
   submitIsDisabled.value = true
   message.value = "";
   console.log(username.value, password.value);
-  await authLogin({username: username.value, password: password.value}).then(res => {
+  await fetchAuthLogin({username: username.value, password: password.value}).then(res => {
     console.log(res)
-    router.push("/")
     userStore.setToken(res.data.access_token)
+    userStore.setLoginStatus(true)
     localStorage.setItem("token", res.data.access_token)
     message.value = res.data.message
   }).finally(() => {
     submitIsDisabled.value = false
   })
+  const userInfo = await fetchUserInfo()
+  userStore.setUserInfo(userInfo.data.data)
+  router.push("/")
 };
 const editPasswordSubmit = () => {
-  editPasswordApi({
+  fetchEditPassword({
     username: username.value,
     old_password: password.value,
     new_password: new_password.value

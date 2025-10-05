@@ -11,17 +11,17 @@ interface EditPasswordForm {
     new_password: string
 }
 
-export function authLogin(loginForm: LoginForm) {
+export function fetchAuthLogin(loginForm: LoginForm) {
     let formData = new FormData();
     formData.append('username', loginForm.username)
     formData.append('password', loginForm.password)
     return httpClient.post('/auth/login', formData)
 }
 
-export function editPasswordApi(editPasswordForm: EditPasswordForm) {
+export function fetchEditPassword(editPasswordForm: EditPasswordForm) {
     return httpClient.post('/auth/edit_password', editPasswordForm)
 }
 
-export function authLogout() {
+export function fetchAuthLogout() {
     return httpClient.post('/auth/logout')
 }

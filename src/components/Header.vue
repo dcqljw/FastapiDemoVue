@@ -3,7 +3,7 @@ import AppConfigurator from "@/components/AppConfigurator.vue";
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 
-import {authLogout} from "@/api/AuthApi.ts";
+import {fetchAuthLogout} from "@/api/AuthApi.ts";
 
 const router = useRouter();
 const visible = ref(false)
@@ -24,7 +24,7 @@ const toggle_message = (e: any) => {
   message_popover.value.toggle(e)
 }
 const logout = () => {
-  authLogout().then(res => {
+  fetchAuthLogout().then(res => {
     console.log(res)
     if (res.data.code === 2000) {
       localStorage.removeItem("token")

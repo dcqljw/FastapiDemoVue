@@ -7,12 +7,14 @@ import {onMounted} from "vue";
 import {RouterView} from "vue-router";
 
 import {useUserStore} from "@/stores/user.ts";
-import {userInfo} from "@/api/UserApi.ts";
+import {fetchUserInfo} from "@/api/UserApi.ts";
 
 const userStore = useUserStore();
 
+console.log("asdfasdf")
+
 onMounted(() => {
-  userInfo().then(res => {
+  fetchUserInfo().then(res => {
     userStore.setUserInfo(res.data.data)
   })
 })

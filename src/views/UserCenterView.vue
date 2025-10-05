@@ -3,7 +3,7 @@ import {ref, onMounted, computed} from "vue";
 import {useRouter} from "vue-router";
 import {useToast} from "primevue/usetoast";
 
-import {editPasswordApi} from "@/api/AuthApi.ts";
+import {fetchEditPassword} from "@/api/AuthApi.ts";
 import {useUserStore} from "@/stores/user.ts";
 
 const router = useRouter();
@@ -22,7 +22,7 @@ const editPasswordHandler = () => {
   if (new_password.value !== confirm_new_password.value) {
     errorMessage.value = "新密码和确认密码不一致"
   } else {
-    editPasswordApi({
+    fetchEditPassword({
       username: username.value,
       old_password: password.value,
       new_password: new_password.value

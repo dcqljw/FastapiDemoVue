@@ -8,14 +8,14 @@ import ToastService from "primevue/toastservice";
 import Aura from '@primeuix/themes/aura';
 
 import App from './App.vue'
-import router from './router'
+import {initRouter} from "@/router";
+import {initStore} from "@/stores";
 import 'primeicons/primeicons.css'
 
 
 const app = createApp(App)
-
-app.use(createPinia())
-app.use(router)
+initStore(app)
+initRouter(app)
 app.use(PrimeVue, {
     theme: {
         preset: Aura

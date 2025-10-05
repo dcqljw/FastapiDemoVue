@@ -1,6 +1,6 @@
 import axios from "axios";
-import router from "@/router";
 import {useToastGlobal} from "@/toast.ts";
+import {useUserStore} from "@/stores/user.ts";
 
 const httpClient = axios.create({
     baseURL: "http://localhost:8000",
@@ -33,6 +33,9 @@ httpClient.interceptors.response.use(
     (error) => {
         console.log(error)
         const toast = useToastGlobal();
+        if (error.response.status === 401) {
+            useUserStore().logOut()
+        }
         let error_msg;
         if (error.message === "Network Error") {
             error_msg = "Network Error"
@@ -45,7 +48,6 @@ httpClient.interceptors.response.use(
             detail: error_msg,
             life: 3000
         });
-        router.push("/login")
         return Promise.reject(error)
     }
 )
