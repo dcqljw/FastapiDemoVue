@@ -35,16 +35,7 @@ const submit = async () => {
   userStore.setUserInfo(userInfo.data.data)
   router.push("/")
 };
-const editPasswordSubmit = () => {
-  fetchEditPassword({
-    username: username.value,
-    old_password: password.value,
-    new_password: new_password.value
-  }).then(res => {
-    console.log(res)
-    showDialog.value = false
-  })
-}
+
 </script>
 
 <template>
@@ -80,17 +71,7 @@ const editPasswordSubmit = () => {
       </template>
     </Card>
   </div>
-  <Dialog v-model:visible="showDialog" header="首次登录需修改密码" modal>
-    <div class="flex flex-col gap-5">
-      <FloatLabel variant="on">
-        <Password toggle-mask :feedback="false" v-model="new_password" class="password"
-                  size="small"/>
-        <label>新密码</label>
-      </FloatLabel>
-      <Button label="确定" @click="editPasswordSubmit" size="small"/>
-    </div>
 
-  </Dialog>
 </template>
 
 <style scoped>
